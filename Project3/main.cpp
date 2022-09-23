@@ -24,7 +24,7 @@ class myInt
             }
             return false;
         }
-        int sumIsEven()
+        bool sumIsEven()
         {
             int sumNum = 0;
             int tempNum = userNumber;
@@ -44,7 +44,21 @@ class myInt
         {
             return pow(userNumber, 0.5);
         }
-        bool isPrime();
+        bool isPrime()
+        {
+            int multCount = 0;
+            for (int i = 1; i <= userNumber; i++) {
+                if (userNumber % i == 0)
+                {
+                    multCount++;
+                }
+            }
+            if (multCount > 2)
+            {
+                return false;
+            }
+            return true;
+        }
         bool isPerfect();
         myInt()
         {
@@ -54,12 +68,13 @@ class myInt
 int main() {
 
     myInt num1;
-    num1.setInt(496);
+    num1.setInt(18);
     cout << num1.getInt() << endl;
     cout << "7:\t" << num1.isMultiple(7) << endl;
     cout << "11:\t" << num1.isMultiple(11) << endl;
     cout << "13:\t" << num1.isMultiple(13) << endl;
     cout << "Sum of digits: " << num1.sumIsEven() << endl;
     cout << "Square Root: " << num1.getSquareRoot() << endl;
+    cout << "Is Prime: " << num1.isPrime() << endl;
     return 0;
 }
