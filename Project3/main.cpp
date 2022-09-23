@@ -23,8 +23,26 @@ class myInt
             }
             return false;
         }
-        bool sumIsEven();
-        double getSquareRoot();
+        int sumIsEven()
+        {
+            int sumNum = 0;
+            int tempNum = userNumber;
+            while (tempNum > 0)
+            {
+                int digit = tempNum % 10;
+                tempNum = tempNum / 10;
+                sumNum = sumNum + digit;
+            }
+            if (sumNum % 2 == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        double getSquareRoot()
+        {
+            return pow(userNumber, 0.5);
+        }
         bool isPrime();
         bool isPerfect();
         myInt()
@@ -35,11 +53,12 @@ class myInt
 int main() {
 
     myInt num1;
-    num1.setInt(497);
+    num1.setInt(496);
     cout << num1.getInt() << endl;
     cout << "7:\t" << num1.isMultiple(7) << endl;
     cout << "11:\t" << num1.isMultiple(11) << endl;
     cout << "13:\t" << num1.isMultiple(13) << endl;
-
+    cout << "Sum of digits: " << num1.sumIsEven() << endl;
+    cout << "Square Root: " << num1.getSquareRoot() << endl;
     return 0;
 }
