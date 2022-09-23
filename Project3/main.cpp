@@ -59,7 +59,21 @@ class myInt
             }
             return true;
         }
-        bool isPerfect();
+        bool isPerfect()
+        {
+            int perfectCount = 0;
+            for (int i = 1; i < userNumber; ++i) {
+                if (userNumber % i == 0)
+                {
+                    perfectCount = perfectCount + i;
+                }
+            }
+            if (perfectCount == userNumber)
+            {
+                return true;
+            }
+            return false;
+        }
         myInt()
         {
             userNumber = 0;
@@ -68,7 +82,7 @@ class myInt
 int main() {
 
     myInt num1;
-    num1.setInt(18);
+    num1.setInt(497);
     cout << num1.getInt() << endl;
     cout << "7:\t" << num1.isMultiple(7) << endl;
     cout << "11:\t" << num1.isMultiple(11) << endl;
@@ -76,5 +90,6 @@ int main() {
     cout << "Sum of digits: " << num1.sumIsEven() << endl;
     cout << "Square Root: " << num1.getSquareRoot() << endl;
     cout << "Is Prime: " << num1.isPrime() << endl;
+    cout << "Is Perfect: " << num1.isPerfect() << endl;
     return 0;
 }
