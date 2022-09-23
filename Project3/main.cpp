@@ -15,7 +15,14 @@ class myInt
         {
             userNumber = num;
         }
-        bool isMultiple(int multiplier);
+        bool isMultiple(int multiplier)
+        {
+            if (userNumber % multiplier == 0)
+            {
+                return true;
+            }
+            return false;
+        }
         bool sumIsEven();
         double getSquareRoot();
         bool isPrime();
@@ -28,10 +35,11 @@ class myInt
 int main() {
 
     myInt num1;
-    num1.setInt(5);
+    num1.setInt(497);
     cout << num1.getInt() << endl;
+    cout << "7:\t" << num1.isMultiple(7) << endl;
+    cout << "11:\t" << num1.isMultiple(11) << endl;
+    cout << "13:\t" << num1.isMultiple(13) << endl;
 
-    myInt num2;
-    cout << num2.getInt() << endl;
     return 0;
 }
