@@ -19,16 +19,106 @@ class myInt
 };
 int main() {
 
-    myInt num1;
-    num1.setInt(497);
-    cout << num1.getInt() << endl;
-    cout << "7:\t" << num1.isMultiple(7) << endl;
-    cout << "11:\t" << num1.isMultiple(11) << endl;
-    cout << "13:\t" << num1.isMultiple(13) << endl;
-    cout << "Sum of digits: " << num1.sumIsEven() << endl;
-    cout << "Square Root: " << num1.getSquareRoot() << endl;
-    cout << "Is Prime: " << num1.isPrime() << endl;
-    cout << "Is Perfect: " << num1.isPerfect() << endl;
+    cout << "Welcome to Integer Manipulation Program" << endl;
+    cout << "The purpose of this program is to:" << endl;
+    cout << "-Get an integer as input" << endl;
+    cout << "-Determine if 7,11,13 is a multiple of the integer" << endl;
+    cout << "-Checks if the sum of the integer's digits are even" << endl;
+    cout << "-Finds the Square Root of the integer" << endl;
+    cout << "-Checks if the integer is prime and perfect" << endl;
+
+    while(true)
+    {
+        cout << "Would you like to run the program?" << endl;
+        string input;
+        cin >> input;
+        if (input == "no" || input == "NO" || input == "n" || input == "N")
+        {
+            break;
+        }
+        if (input == "yes" || input == "YES" || input == "y" || input == "yes")
+        {
+            while (true)
+            {
+                int intInput = 0;
+                cout << "Enter an integer: " << endl;
+                cin >> intInput;
+                if (intInput < 6)
+                {
+                    cout << "Invalid Input! Number must be => 6!" << endl;
+                }
+                if (intInput >= 6)
+                {
+                    myInt num;
+                    num.setInt(intInput);
+                    cout << "I.\t" << intInput << " is ";
+                    if (num.isMultiple(7))
+                    {
+                        cout << "a multiple of 7, ";
+                    }
+                    if (!num.isMultiple(7))
+                    {
+                        cout << "not a multiple of 7, ";
+                    }
+                    if (num.isMultiple(11))
+                    {
+                        cout << "a multiple of 11, ";
+                    }
+                    if (!num.isMultiple(11))
+                    {
+                        cout << "not a multiple of 11, ";
+                    }
+                    if (num.isMultiple(13))
+                    {
+                        cout << "a multiple of 13." << endl;
+                    }
+                    if (!num.isMultiple(13))
+                    {
+                        cout << "not a multiple of 13." << endl;
+                    }
+
+
+                    cout << "II.\t" << "The sum of its digits is ";
+                    if (num.sumIsEven())
+                    {
+                        cout << "even." << endl;
+                    }
+                    if (!num.sumIsEven())
+                    {
+                        cout << "odd. " << endl;
+                    }
+
+                    cout << "III.\tSquare root of " << intInput << " is " <<
+                    num.getSquareRoot() << endl;
+
+                    cout << "IV.\t" << intInput << " is ";
+                    if (num.isPrime())
+                    {
+                        cout << "a prime number." << endl;
+                    }
+                    if (!num.isPrime())
+                    {
+                        cout << "not a prime number." << endl;
+                    }
+
+                    cout << "V.\t" << intInput << " is ";
+                    if (num.isPerfect())
+                    {
+                        cout << "a perfect number." << endl;
+                    }
+                    if (!num.isPerfect())
+                    {
+                        cout << "not a perfect number." << endl;
+                    }
+                    break;
+                }
+            }
+        }
+        else
+        {
+            cout << "Invalid Input! Input must be Y for yes or N for no.\n";
+        }
+    }
     return 0;
 }
 int myInt::getInt()
