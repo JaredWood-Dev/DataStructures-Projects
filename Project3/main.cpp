@@ -1,3 +1,20 @@
+//Author: Jared Wood
+//
+//Serial Number: 51
+//
+//Due Date: 9-23-22
+//Programming Assignment Number 3
+//Fall 2022 - CS 3358 - Section 001
+//
+//Instructor Husain Gholoom
+//
+//Description:
+//This program is to demonstrate understanding and knowledge of how to create
+//and utilize classes in C++.
+
+
+
+
 #include <iostream>
 #include <cmath>
 
@@ -119,6 +136,8 @@ int main() {
             cout << "Invalid Input! Input must be Y for yes or N for no.\n";
         }
     }
+    cout << "This program is implemented by Jared Wood" << endl;
+    cout << "9-26-22" << endl;
     return 0;
 }
 int myInt::getInt()
