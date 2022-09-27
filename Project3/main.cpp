@@ -12,8 +12,7 @@
 //This program is to demonstrate understanding and knowledge of how to create
 //and utilize classes in C++.
 
-
-
+//TODO: ADHERE TO STYLE GUIDELINES
 
 #include <iostream>
 #include <cmath>
@@ -23,19 +22,47 @@ using namespace std;
 class myInt
 {
     private:
-        int userNumber;
+        int userNumber; //Stores the user's Number
+                        //Must be >= 6
     public:
         int getInt();
+        //Returns the userNumber
         void setInt(int num);
+        //Sets the userNumber to the parameter
         bool isMultiple(int multiplier);
+        //Checks if userNum is divisible by the given parameter
         bool sumIsEven();
+        //Checks if userNumber is even
         double getSquareRoot();
+        //Calculates the square root of userNumber
         bool isPrime();
+        //Checks if userNumber is prime
         bool isPerfect();
+        //Checks if userNumber is a perfect number
         myInt();
+        //Default constructor, sets userNum to 0
 };
+//------------------------------------
+//Class: MyInt
+//Purpose: To create and manipulate an integer
+//to provide desired output for the user.
+//
+//Private:
+//userNumber
+//
+//Public:
+//getInt()
+//setInt()
+//isMultiple()
+//sumIsEven()
+//getSquareRoot()
+//isPrime()
+//isPerfect()
+//myInt() - Default Constructor
+//------------------------------------
 int main() {
 
+    //Program Header; defines what the program will do
     cout << "Welcome to Integer Manipulation Program" << endl;
     cout << "The purpose of this program is to:" << endl;
     cout << "-Get an integer as input" << endl;
@@ -44,11 +71,15 @@ int main() {
     cout << "-Finds the Square Root of the integer" << endl;
     cout << "-Checks if the integer is prime and perfect" << endl;
 
+    //This loops allows the program to be repeated
     while(true)
     {
         cout << "Would you like to run the program?" << endl;
-        string input;
+        string input; //Variable used for checking if user wishes to continue
+                        //The Program; y = yes, n = no
         cin >> input;
+
+        //Ensures valid input
         if (input == "no" || input == "NO" || input == "n" || input == "N")
         {
             break;
@@ -57,17 +88,23 @@ int main() {
         {
             while (true)
             {
-                int intInput = 0;
+                int intInput = 0; //Variable to store user's number
+                                    //Must be >= 6
                 cout << "Enter an integer: " << endl;
                 cin >> intInput;
+
+                //Ensures Valid number input
                 if (intInput < 6)
                 {
                     cout << "Invalid Input! Number must be => 6!" << endl;
                 }
                 if (intInput >= 6)
                 {
+                    //Creates the integer object
                     myInt num;
                     num.setInt(intInput);
+
+                    //Checks if number is a multiple of 7,11, and 13
                     cout << "I.\t" << intInput << " is ";
                     if (num.isMultiple(7))
                     {
@@ -94,7 +131,7 @@ int main() {
                         cout << "not a multiple of 13." << endl;
                     }
 
-
+                    //Checks the sum of the digits
                     cout << "II.\t" << "The sum of its digits is ";
                     if (num.sumIsEven())
                     {
@@ -105,9 +142,11 @@ int main() {
                         cout << "odd. " << endl;
                     }
 
+                    //Gets the square root
                     cout << "III.\tSquare root of " << intInput << " is " <<
                     num.getSquareRoot() << endl;
 
+                    //Checks if the number is a prime number
                     cout << "IV.\t" << intInput << " is ";
                     if (num.isPrime())
                     {
@@ -118,6 +157,7 @@ int main() {
                         cout << "not a prime number." << endl;
                     }
 
+                    //Checks if the number is a perfect number
                     cout << "V.\t" << intInput << " is ";
                     if (num.isPerfect())
                     {
@@ -136,6 +176,8 @@ int main() {
             cout << "Invalid Input! Input must be Y for yes or N for no.\n";
         }
     }
+
+    //Program footer
     cout << "This program is implemented by Jared Wood" << endl;
     cout << "9-26-22" << endl;
     return 0;
@@ -144,10 +186,18 @@ int myInt::getInt()
 {
     return userNumber;
 }
+//-----------------------------------
+//Gets the value stored in userNumber
+//-----------------------------------
 void myInt::setInt(int num)
 {
     userNumber = num;
 }
+//---------------------------------------------
+//Sets the value of userNumber to the parameter
+//
+//Param1: int num - user input number
+//---------------------------------------------
 bool myInt::isMultiple(int multiplier)
 {
     if (userNumber % multiplier == 0)
@@ -156,10 +206,15 @@ bool myInt::isMultiple(int multiplier)
     }
     return false;
 }
+//------------------------------------------------------------
+//Determines if userInt is divisible by the given parameter
+//
+//Param 1: int multiplier - to check if userNum is divisible by
+//------------------------------------------------------------
 bool myInt::sumIsEven()
 {
-    int sumNum = 0;
-    int tempNum = userNumber;
+    int sumNum = 0; //Stores the sum of the digits
+    int tempNum = userNumber; //Stores the userNumber for manipulation
     while (tempNum > 0)
     {
         int digit = tempNum % 10;
@@ -172,13 +227,19 @@ bool myInt::sumIsEven()
     }
     return false;
 }
+//----------------------------------------------------------------
+//Checks if the sum of the digits of userNum is even
+//----------------------------------------------------------------
 double myInt::getSquareRoot()
 {
     return pow(userNumber, 0.5);
 }
+//-------------------------------------
+//Return the square root of userNumber
+//-------------------------------------
 bool myInt::isPrime()
 {
-    int multCount = 0;
+    int multCount = 0; //Stores the number of numbers divisible by userNumber
     for (int i = 1; i <= userNumber; i++) {
         if (userNumber % i == 0)
         {
@@ -191,9 +252,13 @@ bool myInt::isPrime()
     }
     return true;
 }
+//-----------------------------------------------
+//Checks if userNumber is a prime number
+//-----------------------------------------------
 bool myInt::isPerfect()
 {
-    int perfectCount = 0;
+    int perfectCount = 0; //Stores the total value of multiples for finding
+                            //the perfect number.
     for (int i = 1; i < userNumber; ++i) {
         if (userNumber % i == 0)
         {
@@ -206,7 +271,13 @@ bool myInt::isPerfect()
     }
     return false;
 }
+//---------------------------------------------
+//Checks if userNumber is a perfect number.
+//---------------------------------------------
 myInt::myInt()
 {
     userNumber = 0;
 }
+//-----------------------------------------------------------------
+//Default Constructor: Sets userNumber to zero if no input is given
+//-----------------------------------------------------------------
