@@ -12,8 +12,6 @@
 //This program is to demonstrate understanding and knowledge of how to create
 //and utilize classes in C++.
 
-//TODO: ADHERE TO STYLE GUIDELINES
-
 #include <iostream>
 #include <cmath>
 
@@ -179,7 +177,7 @@ int main() {
 
     //Program footer
     cout << "This program is implemented by Jared Wood" << endl;
-    cout << "9-26-22" << endl;
+    cout << "9-27-22" << endl;
     return 0;
 }
 int myInt::getInt()
