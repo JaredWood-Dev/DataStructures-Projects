@@ -11,20 +11,20 @@ class stack
         int pop();
         int peek();
         int size();
-        bool isFull();
         bool isEmpty();
 
-        void makeEmpty();
+        void empty();
         void print();
 
     private:
-        struct quoteNode
+        struct stackNode
         {
             int value;
-            quoteNode *next;
-            quoteNode *prev;
+            stackNode *next;
+            stackNode *prev;
         };
-        quoteNode *head;
+        stackNode *head;
+        stackNode *originNode;
         int index;
 };
 
@@ -42,24 +42,35 @@ int main() {
     myStack.push(6);
     myStack.push(7);
     myStack.push(8);
+    myStack.print();
 
     cout << "Count: " << myStack.size() << endl;
     cout << "TEST: " << myStack.peek() << endl;
     cout << "TEST: " << myStack.peek() << endl;
     cout << "1:" << myStack.pop() << endl;
+    myStack.print();
     cout << "2:" << myStack.pop() << endl;
+    myStack.print();
     cout << "3:" << myStack.pop() << endl;
+    myStack.print();
     cout << "Count: " << myStack.size() << endl;
+    cout << "Is empty: " << myStack.isEmpty() << endl;
+    myStack.print();
+    myStack.pop();
+    myStack.print();
+    cout << "Count: " << myStack.size() << endl;
+    cout << "Is empty: " << myStack.isEmpty() << endl;
+    myStack.print();
     return 0;
 }
 
 stack::stack()
 {
-    quoteNode *originNode = new quoteNode;
+    /*originNode = new stackNode;
     originNode->value = 0;
-    head = originNode->next;
-    originNode->prev = NULL;
-    index = 0;
+    originNode->prev = nullptr;
+    originNode->next = nullptr;
+    */index = 0;
 }
 
 stack::~stack()
@@ -69,10 +80,23 @@ stack::~stack()
 
 void stack::push(int input)
 {
-    quoteNode *newNode = new quoteNode;
-    newNode->prev = head;
-    head = newNode;
+    stackNode *newNode = new stackNode;
     newNode->value = input;
+    if (index == 0)
+    {
+        originNode = newNode;
+        originNode->prev = nullptr;
+        originNode->next = nullptr;
+        head = newNode;
+        head->next = nullptr;
+        head->prev = nullptr;
+    }
+    else
+    {
+        newNode->prev = head;
+        head->next = newNode;
+        head = head->next;
+    }
     index++;
 }
 
@@ -92,4 +116,41 @@ int stack::peek()
 int stack::size()
 {
     return index;
+}
+bool stack::isEmpty()
+{
+    if (originNode == nullptr || head == nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+void stack::empty()
+{
+    stackNode *currNode = originNode;
+    while(currNode->next != nullptr)
+    {
+        if (currNode->prev != nullptr)
+        {
+            delete(currNode->prev);
+            currNode = currNode->next;
+        }
+    }
+    index = 0;
+}
+void stack::print()
+{
+    stackNode *currNode = originNode;
+    int i = 0;
+    cout << "Stack: ";
+    while( i < index)
+    {
+        cout << currNode->value;
+        currNode = currNode->next;
+        i++;
+    }
+    cout << endl;
 }
