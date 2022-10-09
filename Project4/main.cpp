@@ -156,12 +156,16 @@ void stack::print()
 {
     stackNode *currNode = originNode;
     int i = 0;
-    cout << "Stack: ";
     while( i < index)
     {
         cout << currNode->value;
         currNode = currNode->next;
         i++;
+    }
+    if (index == 0)
+    {
+        cout << "There are no elements in the stack." << endl;
+        return;
     }
     cout << endl;
 }
