@@ -61,6 +61,15 @@ int main() {
     cout << "Count: " << myStack.size() << endl;
     cout << "Is empty: " << myStack.isEmpty() << endl;
     myStack.print();
+    cout << "Testing Empty(): " << endl;
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
+    cout << "Length: " << myStack.size() << endl;
+    myStack.print();
+    myStack.empty();
+    myStack.print();
+    cout << "Length: " << myStack.size() << endl;
     return 0;
 }
 
@@ -131,13 +140,15 @@ bool stack::isEmpty()
 void stack::empty()
 {
     stackNode *currNode = originNode;
-    while(currNode->next != nullptr)
+    while(currNode != nullptr)
     {
-        if (currNode->prev != nullptr)
+        currNode = currNode->next;
+        free(currNode->prev);
+        if (currNode == head)
         {
-            delete(currNode->prev);
-            currNode = currNode->next;
+            break;
         }
+
     }
     index = 0;
 }
