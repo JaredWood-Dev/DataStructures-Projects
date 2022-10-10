@@ -64,6 +64,8 @@ int main() {
     myQ.print();
     myQ.remove(2);
     myQ.print();
+    myQ.pop();
+    myQ.print();
     cout << "Is empty: " << myQ.isEmpty() << endl;
     myQ.empty();
     cout << "Is empty: " << myQ.isEmpty() << endl;
@@ -111,6 +113,7 @@ int stack::pop()
     int num = 0;
     num = head->value;
     head = head->prev;
+    free(head->next);
     index--;
     return num;
 }
@@ -231,9 +234,10 @@ void queue::insert(int input, int inputIndex)
 }
 int queue::pop()
 {
-    int num = 0; //Need to change, queue is first in, first out
-    num = head->value;
-    head = head->prev;
+    int num = 0;
+    num = originNode->value;
+    originNode = originNode->next;
+    free(originNode->prev);
     index--;
     return num;
 }
