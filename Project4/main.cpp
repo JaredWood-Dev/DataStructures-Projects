@@ -3,7 +3,7 @@
 //Programming Assignment Number 4
 //Fall 2022 - CS 3358 - 001
 //Due Date: 10-10-22
-//Instructor Husian Gholoom
+//Instructor Husain Gholoom
 //Description:
 //This program is designed to demonstrate understanding in both implementation
 //of pointer-based linked lists, and stack and queue data types.
@@ -11,7 +11,6 @@
 #include <iostream>
 #include <time.h>
 
-//TODO Adhere to style guideline and test program in codeblocks
 using namespace std;
 class stack
 {
