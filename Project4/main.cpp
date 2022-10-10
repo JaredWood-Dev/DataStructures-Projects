@@ -12,7 +12,6 @@ class stack
         int peek();
         int size();
         bool isEmpty();
-
         void empty();
         void print();
 
@@ -32,44 +31,42 @@ class queue
 {
     public:
         queue();
+        ~queue();
 
+        void push(int input);
+        void insert(int input, int inputIndex);
+        int pop();
+        void remove(int inputIndex);
+        bool isEmpty();
+        void empty();
+        void print();
 
+    private:
+        struct queueNode
+        {
+            int value;
+            queueNode *next;
+            queueNode *prev;
+        };
+        queueNode *originNode;
+        queueNode *head;
+        int index;
 };
 
 int main() {
-    stack myStack;
-    myStack.push(5);
-    myStack.push(6);
-    myStack.push(7);
-    myStack.push(8);
-    myStack.print();
 
-    cout << "Count: " << myStack.size() << endl;
-    cout << "TEST: " << myStack.peek() << endl;
-    cout << "TEST: " << myStack.peek() << endl;
-    cout << "1:" << myStack.pop() << endl;
-    myStack.print();
-    cout << "2:" << myStack.pop() << endl;
-    myStack.print();
-    cout << "3:" << myStack.pop() << endl;
-    myStack.print();
-    cout << "Count: " << myStack.size() << endl;
-    cout << "Is empty: " << myStack.isEmpty() << endl;
-    myStack.print();
-    myStack.pop();
-    myStack.print();
-    cout << "Count: " << myStack.size() << endl;
-    cout << "Is empty: " << myStack.isEmpty() << endl;
-    myStack.print();
-    cout << "Testing Empty(): " << endl;
-    myStack.push(1);
-    myStack.push(2);
-    myStack.push(3);
-    cout << "Length: " << myStack.size() << endl;
-    myStack.print();
-    myStack.empty();
-    myStack.print();
-    cout << "Length: " << myStack.size() << endl;
+    queue myQ;
+    myQ.push(1);
+    myQ.push(2);
+    myQ.push(3);
+    myQ.print();
+    myQ.insert(4,2);
+    myQ.print();
+    myQ.remove(2);
+    myQ.print();
+    cout << "Is empty: " << myQ.isEmpty() << endl;
+    myQ.empty();
+    cout << "Is empty: " << myQ.isEmpty() << endl;
     return 0;
 }
 
@@ -165,6 +162,147 @@ void stack::print()
     if (index == 0)
     {
         cout << "There are no elements in the stack." << endl;
+        return;
+    }
+    cout << endl;
+}
+queue::queue()
+{
+    index = 0;
+    originNode = nullptr;
+}
+queue::~queue()
+{
+
+}
+void queue::push(int input)
+{
+    queueNode *newNode = new queueNode;
+    newNode->value = input;
+    if (originNode == nullptr)
+    {
+        originNode = newNode;
+        originNode->next = nullptr;
+        originNode->prev = nullptr;
+        head = newNode;
+        head->next = nullptr;
+        head->prev = nullptr;
+    }
+    else
+    {
+        newNode->prev = head;
+        head->next = newNode;
+        head = newNode;
+    }
+    index++;
+}
+
+void queue::insert(int input, int inputIndex)
+{
+    if (inputIndex > index)
+    {
+        cout << "Error: Out of bounds." << endl;
+        return;
+    }
+
+    queueNode *indexPointer = new queueNode;
+    int loc = 0;
+    indexPointer = originNode;
+    while(indexPointer != nullptr)
+    {
+        if(loc == inputIndex)
+        {
+            queueNode *newNode = new queueNode;
+            newNode->value = input;
+            newNode->prev = indexPointer->prev;
+            newNode->next = indexPointer;
+            indexPointer->prev->next = newNode;
+            indexPointer->prev = newNode;
+            index++;
+        }
+        loc++;
+        if (loc == index)
+        {
+            break;
+        }
+        indexPointer = indexPointer->next;
+    }
+
+}
+int queue::pop()
+{
+    int num = 0; //Need to change, queue is first in, first out
+    num = head->value;
+    head = head->prev;
+    index--;
+    return num;
+}
+
+void queue::remove(int inputIndex)
+{
+    if (index == 0)
+    {
+        cout << "There are no elements in the queue." << endl;
+        return;
+    }
+
+    queueNode *indexNode = originNode;
+    int i = 0;
+    while ( i < index)
+    {
+        if (inputIndex == i)
+        {
+            indexNode->prev->next = indexNode->next;
+            indexNode->next->prev = indexNode->prev;
+            index--;
+            return;
+        }
+        i++;
+        indexNode = indexNode->next;
+    }
+}
+
+bool queue::isEmpty()
+{
+    if(index == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void queue::empty()
+{
+    queueNode *currNode = originNode;
+    while(currNode != nullptr)
+    {
+        currNode = currNode->next;
+        free(currNode->prev);
+        if (currNode == head)
+        {
+            break;
+        }
+
+    }
+    index = 0;
+}
+
+void queue::print()
+{
+    queueNode *currNode = originNode;
+    int i = 0;
+    while( i < index)
+    {
+        cout << currNode->value << " ";
+        currNode = currNode->next;
+        i++;
+    }
+    if (index == 0)
+    {
+        cout << "There are no elements in the queue." << endl;
         return;
     }
     cout << endl;
