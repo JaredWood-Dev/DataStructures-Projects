@@ -1,5 +1,7 @@
 #include <iostream>
+#include <time.h>
 
+//TODO Adhere to style guideline and test program in codeblocks
 using namespace std;
 class stack
 {
@@ -40,6 +42,8 @@ class queue
         bool isEmpty();
         void empty();
         void print();
+        int max();
+        int min();
 
     private:
         struct queueNode
@@ -55,20 +59,91 @@ class queue
 
 int main() {
 
-    queue myQ;
-    myQ.push(1);
-    myQ.push(2);
-    myQ.push(3);
-    myQ.print();
-    myQ.insert(4,2);
-    myQ.print();
-    myQ.remove(2);
-    myQ.print();
-    myQ.pop();
-    myQ.print();
-    cout << "Is empty: " << myQ.isEmpty() << endl;
-    myQ.empty();
-    cout << "Is empty: " << myQ.isEmpty() << endl;
+    srand(time(0));
+    while (true)
+    {
+        //Part A: Stack of 7 random numbers
+        stack myStack;
+        for (int i = 0; i < 7; ++i) {
+            myStack.push(rand() % 6 + 60);
+        }
+        cout << "A. Stack of 7 random integers: " << endl;
+        myStack.print();
+
+        //Part B: Queue of 7 random numbers
+        queue myQueue;
+        for (int i = 0; i < 7; ++i) {
+            myQueue.push(rand() % 6 + 105);
+        }
+        cout << "B. Queue of 7 random integers: " << endl;
+        myQueue.print();
+
+        //Part C: Insert -20 into the stack
+        cout << "C. Insert the element -20 in the stack" << endl;
+        myStack.push(-20);
+        myStack.print();
+
+        //Part D: Remove the top two elements from the stack
+        cout << "D. Remove the top two elements from the stack" << endl;
+        myStack.pop();
+        myStack.pop();
+        myStack.print();
+
+        //Part E: Insert -500 into the queue
+        cout << "E. Insert the element -500 into the queue" << endl;
+        myQueue.push(-500);
+        myQueue.print();
+
+
+        //Part F: Insert an element -200 into the 3rd location of the queue
+        cout << "F. Insert an element -200 into the 3rd location of the queue"
+            << endl;
+        myQueue.insert(-200, 2);
+        myQueue.print();
+
+        //Part G: Remove the first element from the queue
+        cout << "G. Remove the first element from the queue" << endl;
+        myQueue.pop();
+        myQueue.print();
+
+        //Part H: Remove the fourth element from the queue
+        cout << "H. Remove the fourth element the queue" << endl;
+        myQueue.remove(4);
+        myQueue.print();
+
+        //Part I: Find the min and max elements in the queue
+        cout << "I. Find the minimum and maximum elements in the queue" << endl;
+        cout << "Max: " << myQueue.max() << " Min: " << myQueue.min() << endl;
+        myQueue.print();
+
+        //Part J: Delete the entire stack
+        cout << "J. Deleting the Stack" << endl;
+        myStack.empty();
+
+        //Park K: Try to delete first element
+        cout << "K. Attempting to delete first element of the stack" << endl;
+        myStack.pop();
+
+        //Park L: Delete the entire queue
+        cout << "L. Deleting the Queue" << endl;
+        myQueue.empty();
+
+        //Part M: Try to delete the first element
+        cout << "M. Attempting to delete first element of the queue" << endl;
+        myQueue.pop();
+
+        char userInput = ' ';
+        cout << "Enter 'X' to end the program. Enter anything else to continue "
+                "the program" << endl;
+        cin >> userInput;
+        if (userInput == 'X')
+        {
+            break;
+        }
+    }
+    cout << "Thank you for using this Linked List-Based Stack and Queue "
+            "program."<< endl;
+    cout << "This program was implemented by Jared Wood on 10-9-22" << endl;
     return 0;
 }
 
@@ -110,6 +185,11 @@ void stack::push(int input)
 
 int stack::pop()
 {
+    if (index == 0)
+    {
+        cout << "There are no elements in the stack." << endl;
+        return -1;
+    }
     int num = 0;
     num = head->value;
     head = head->prev;
@@ -158,7 +238,7 @@ void stack::print()
     int i = 0;
     while( i < index)
     {
-        cout << currNode->value;
+        cout << currNode->value << " ";
         currNode = currNode->next;
         i++;
     }
@@ -234,6 +314,11 @@ void queue::insert(int input, int inputIndex)
 }
 int queue::pop()
 {
+    if (index == 0)
+    {
+        cout << "There are no elements in the queue." << endl;
+        return -1;
+    }
     int num = 0;
     num = originNode->value;
     originNode = originNode->next;
@@ -310,4 +395,38 @@ void queue::print()
         return;
     }
     cout << endl;
+}
+
+int queue::max()
+{
+    int max = 0;
+    int i = 0;
+    queueNode *indexNode = originNode;
+    while (i < index)
+    {
+        if (indexNode->value > max)
+        {
+            max = indexNode->value;
+        }
+        indexNode = indexNode->next;
+        i++;
+    }
+    return max;
+}
+
+int queue::min()
+{
+    int min = 0;
+    int i = 0;
+    queueNode *indexNode = originNode;
+    while (i < index)
+    {
+        if (indexNode->value < min)
+        {
+            min = indexNode->value;
+        }
+        indexNode = indexNode->next;
+        i++;
+    }
+    return min;
 }
