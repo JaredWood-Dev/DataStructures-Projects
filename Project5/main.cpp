@@ -1,15 +1,19 @@
 #include <cstdlib>
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
+    srand(time(0));
+
     //Introduction to the application
     cout << "*** Welcome to My APP ***" << endl;
 
     //Get Size of the Array, store it in a variable
     int arraySize = 0; //userInput stores what size of the array
+    const int ClionArraySize = 10; //TODO: REMOVE FOR SUBMISSION AND TESTING
     cout << "Enter the Array size. ( Must be  >= 5 and <= 20 ) -> ";
     cin >> arraySize;
     cout << endl;
@@ -21,7 +25,14 @@ int main()
     }
     else
     {
-        //Generate Array
+        //Creating the Array and populate it with elements
+        cout << "The generated array is : ";
+        int userArray[ClionArraySize]; //TODO
+        for (int i = 0; i < ClionArraySize; ++i) { //TODO
+            userArray[i] = rand() % 479 + 21;
+            cout << userArray[i] << " ";
+        }
+
     }
 
     cout << endl;
