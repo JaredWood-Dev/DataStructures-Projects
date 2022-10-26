@@ -4,6 +4,8 @@
 
 using namespace std;
 
+void reverseDisplay(int inputArray[], int index);
+
 int main()
 {
     srand(time(0));
@@ -28,14 +30,32 @@ int main()
         //Creating the Array and populate it with elements
         cout << "The generated array is : ";
         int userArray[ClionArraySize]; //TODO
-        for (int i = 0; i < ClionArraySize; ++i) { //TODO
+        for (int i = 0; i < arraySize; ++i) {
             userArray[i] = rand() % 479 + 21;
             cout << userArray[i] << " ";
         }
+
+        cout << endl << "The Reversed Array is: ";
+        reverseDisplay(userArray, arraySize);
+        cout << endl;
 
     }
 
     cout << endl;
     cout << "Jared Wood - Programmer \n October 2022" << endl;
 
+}
+
+void reverseDisplay(int inputArray[], int index)
+{
+    //Print value at index
+    cout << inputArray[index - 1] << " ";
+
+    //Edge case, terminates recursion when the entire loop is completed
+    if (index == 1)
+    {
+        return;
+    }
+    index--;
+    reverseDisplay(inputArray, index);
 }
