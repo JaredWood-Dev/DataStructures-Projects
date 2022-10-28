@@ -5,6 +5,11 @@
 using namespace std;
 
 void reverseDisplay(int inputArray[], int index);
+//Takes an input array and recursively displays it in reserve
+
+int pow(int input, int power);
+//Takes a value and the power to raise it to and recursively calculates the
+// result
 
 int main()
 {
@@ -39,6 +44,9 @@ int main()
         reverseDisplay(userArray, arraySize);
         cout << endl;
 
+        cout << userArray[arraySize - 1] << " raised to the 2nd power is: ";
+        cout << pow(userArray[arraySize - 1], 2);
+
     }
 
     cout << endl;
@@ -59,3 +67,30 @@ void reverseDisplay(int inputArray[], int index)
     index--;
     reverseDisplay(inputArray, index);
 }
+//-----------------------------------------------------------------------------
+//Description: Takes and input array and recursively displays the array
+//backwards.
+//
+//param1: inputArray - The array to be sorted.
+//param2: index - used for indexing throughout the array.
+//return: returns to signify when terminate the recursion.
+//-----------------------------------------------------------------------------
+
+int pow(int input, int power)
+{
+    //Every call of pow() multiplies input by itself.
+    if (power == 1)
+    {
+        return input;
+    }
+    power--;
+    pow(input * input, power);
+}
+//-----------------------------------------------------------------------------
+//Description: Takes an input number and raises it to the power given
+//
+//param1: input - the number to raised.
+//param2: power - the number of how many times to multiply the input by itself
+//return: The result of the math operation
+//-----------------------------------------------------------------------------
+
