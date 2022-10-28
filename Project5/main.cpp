@@ -11,6 +11,10 @@ int pow(int input, int power);
 //Takes a value and the power to raise it to and recursively calculates the
 // result
 
+void displayPows(int input, int end);
+//Displays a table of values from 1 to n, with n being the first element in
+//the array, and the square of each number.
+
 int main()
 {
     srand(time(0));
@@ -46,6 +50,11 @@ int main()
 
         cout << userArray[arraySize - 1] << " raised to the 2nd power is: ";
         cout << pow(userArray[arraySize - 1], 2);
+        cout << endl;
+
+        cout << "Table of square values 1 - " << userArray[0] << endl;
+        cout << "N\tN Squared" << endl;
+        displayPows(1, userArray[0]);
 
     }
 
@@ -92,5 +101,24 @@ int pow(int input, int power)
 //param1: input - the number to raised.
 //param2: power - the number of how many times to multiply the input by itself
 //return: The result of the math operation
+//-----------------------------------------------------------------------------
+
+void displayPows(int input, int end)
+{
+    if (input == end)
+    {
+        return;
+    }
+    cout << input << "\t" << pow(input, 2) << endl;
+    input++;
+    displayPows(input, end);
+}
+//-----------------------------------------------------------------------------
+//Description: Creates a table containing numbers from 1 to the input value,
+//and the square of those numbers.
+//
+//param1: input - the begging of the table, typically 1.
+//param2: end - the end of the table, the first element of the array
+//return: terminates the recursion
 //-----------------------------------------------------------------------------
 
