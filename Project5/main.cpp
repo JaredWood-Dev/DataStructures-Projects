@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
-
+//TODO: Adhere to style guidelines,
 using namespace std;
 
 void reverseDisplay(int inputArray[], int index);
@@ -14,6 +14,9 @@ int pow(int input, int power);
 void displayPows(int input, int end);
 //Displays a table of values from 1 to n, with n being the first element in
 //the array, and the square of each number.
+
+void vertDisplay(int input);
+//Displays the number inputted vertically, one digit at a time
 
 int main()
 {
@@ -55,6 +58,10 @@ int main()
         cout << "Table of square values 1 - " << userArray[0] << endl;
         cout << "N\tN Squared" << endl;
         displayPows(1, userArray[0]);
+        cout << endl;
+
+        cout << userArray[1] << " vertically: " << endl;
+        vertDisplay(userArray[1]);
 
     }
 
@@ -122,3 +129,20 @@ void displayPows(int input, int end)
 //return: terminates the recursion
 //-----------------------------------------------------------------------------
 
+void vertDisplay(int input)
+{
+    if (input == 0)
+    {
+        return;
+    }
+    int num = input % 10; //Variable used for storing calculations
+    input = (input - num) / 10;
+    vertDisplay(input);
+    cout << num << endl;
+}
+//-----------------------------------------------------------------------------
+//Description: Displays each digit of an input number separately
+//
+//param1: input - number to display vertically
+//return: terminates the recursion
+//-----------------------------------------------------------------------------
