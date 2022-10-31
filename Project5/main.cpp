@@ -1,3 +1,17 @@
+//Author: Jared Wood
+//
+//Serial Number: 51
+//
+//Due Date: October 31, 2022
+//Programming Assignment Number 5
+//
+//Fall 2022 - CS 3358 - 001
+//
+//Instructor: Husain Gholoom
+//
+//Description: To demonstrate knowledge and understanding of
+// recursive algorithms
+
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
@@ -24,7 +38,7 @@ bool isIncreasing(int input);
 int reverse(int input);
 //Reverses the digits of a number.
 
-bool isPrime(int input);
+bool isPrime(int input, int mult);
 //Determines if the number given is prime.
 
 int main()
@@ -82,6 +96,14 @@ int main()
 
         cout << "The reversed of " << userArray[3] << " is " <<
         reverse(userArray[3]) << endl;
+
+
+        cout << userArray[4] << " is ";
+        if (!isPrime(userArray[4],1))
+        {
+            cout << "not ";
+        }
+        cout << "Prime" << endl;
 
     }
 
@@ -217,4 +239,40 @@ int reverse(int input)
 //
 //param1: input - the number to be reversed
 //output: the reversed number
+//-----------------------------------------------------------------------------
+
+bool isPrime(int input, int mult)
+{
+    static int solutions = 0; //Stores how many mays there are to divide input
+
+    //If size 1 or if all combinations have been tried, terminate
+    if (mult == input)
+    {
+        return false;
+    }
+
+    //If mult successfully divides input
+    if (input % mult == 0)
+    {
+        solutions++;
+    }
+
+    //Recursively check every combination
+    mult++;
+    isPrime(input, mult);
+
+    //Determine if prime or not
+    if (solutions > 2)
+    {
+        return false;
+    }
+    return true;
+}
+//-----------------------------------------------------------------------------
+//Description: Determines if the given number is prime or not
+//
+//param1: input - the number to check if it is prime
+//param2: mult - keeps track of what number is dividing input
+//output: termination conditions and if the number is prime or not
+//true = prime, false = not prime
 //-----------------------------------------------------------------------------
