@@ -21,6 +21,12 @@ void vertDisplay(int input);
 bool isIncreasing(int input);
 //Checks if the digits of a number are increasing.
 
+int reverse(int input);
+//Reverses the digits of a number.
+
+bool isPrime(int input);
+//Determines if the number given is prime.
+
 int main()
 {
     srand(time(0));
@@ -73,6 +79,9 @@ int main()
             cout << "not ";
         }
         cout << "in increasing order" << endl;
+
+        cout << "The reversed of " << userArray[3] << " is " <<
+        reverse(userArray[3]) << endl;
 
     }
 
@@ -179,4 +188,33 @@ bool isIncreasing(int input)
 //
 //param1: input - the integer input to be checked.
 //output: returns true if the digits are increasing, false otherwise
+//-----------------------------------------------------------------------------
+
+int reverse(int input)
+{
+    //Variables to store the place of the digit and the total number to return
+    static int total = 0; //Stores the number to return
+    static int magnitude = 1; //Stores the current position of the digit
+
+    //Loops if there is still value present to be reversed.
+    if (input > 0){
+
+        //Recurse to the largest digit in the number
+        reverse(input / 10);
+
+        //Add the digit to the new number, multiply by what magnitude it is
+        total = total + ( input % 10) * magnitude;
+
+        //Increase magnitude after every iteration to have 1s, 10s, 100s, etc
+        magnitude = magnitude * 10;
+    }
+
+    //Return the final amount
+    return total;
+}
+//-----------------------------------------------------------------------------
+//Description: Reverses the digits in the inputted number
+//
+//param1: input - the number to be reversed
+//output: the reversed number
 //-----------------------------------------------------------------------------
