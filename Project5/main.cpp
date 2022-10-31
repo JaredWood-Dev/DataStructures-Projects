@@ -50,7 +50,6 @@ int main()
 
     //Get Size of the Array, store it in a variable
     int arraySize = 0; //userInput stores what size of the array
-    const int ClionArraySize = 10; //TODO: REMOVE FOR SUBMISSION AND TESTING
     cout << "Enter the Array size. ( Must be  >= 5 and <= 20 ) -> ";
     cin >> arraySize;
     cout << endl;
@@ -64,7 +63,7 @@ int main()
     {
         //Creating the Array and populate it with elements
         cout << "The generated array is : ";
-        int userArray[ClionArraySize]; //TODO
+        int userArray[arraySize];
         for (int i = 0; i < arraySize; ++i) {
             userArray[i] = rand() % 479 + 21;
             cout << userArray[i] << " ";
