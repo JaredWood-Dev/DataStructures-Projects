@@ -18,6 +18,9 @@ void displayPows(int input, int end);
 void vertDisplay(int input);
 //Displays the number inputted vertically, one digit at a time
 
+bool isIncreasing(int input);
+//Checks if the digits of a number are increasing.
+
 int main()
 {
     srand(time(0));
@@ -62,6 +65,14 @@ int main()
 
         cout << userArray[1] << " vertically: " << endl;
         vertDisplay(userArray[1]);
+        cout << endl;
+
+        cout << userArray[2] << " is ";
+        if(!isIncreasing(userArray[2]))
+        {
+            cout << "not ";
+        }
+        cout << "in increasing order" << endl;
 
     }
 
@@ -145,4 +156,27 @@ void vertDisplay(int input)
 //
 //param1: input - number to display vertically
 //return: terminates the recursion
+//-----------------------------------------------------------------------------
+
+bool isIncreasing(int input)
+{
+    int num = input % 10;
+    input = (input - num) / 10;
+    int num2 = input % 10;
+    if(num2 < num)
+    {
+        if (input < 10 || isIncreasing(input))
+        {
+            return true;
+        }
+
+    }
+    return false;
+}
+//-----------------------------------------------------------------------------
+//Description: Takes an integer as input and determines weather its digits
+//are increasing or not.
+//
+//param1: input - the integer input to be checked.
+//output: returns true if the digits are increasing, false otherwise
 //-----------------------------------------------------------------------------
