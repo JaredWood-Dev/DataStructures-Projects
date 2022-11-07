@@ -33,10 +33,13 @@ int main() {
     char charArray[arraySize] = {}; //TODO
     int intArray[arraySize] = {}; //TODO
 
-    //Populate the character array
+    //Populate the arrays
     for (int i = 0; i < userNum; ++i) {
         charArray[i] = rand() % 26 + 97;
+        intArray[i] = rand() % 25 + 1;
     }
+
+    
 
     //Footer
     cout << "November 2022" << endl;
