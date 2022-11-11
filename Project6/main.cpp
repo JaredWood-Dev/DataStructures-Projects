@@ -90,9 +90,15 @@ int main() {
 
     //Selection Sort
     cout << "Character array selection sort:" << endl;
+    time_t startTime = clock(); //Stores start time
     selectionSort(tempCharArray, userNum);
+    time_t endTime = clock(); //Stores end time
+    time_t selectChar = difftime(endTime, startTime); //Saves the time for sort
+    startTime = clock();
     cout << endl << "Integer array selection sort:" << endl;
     selectionSort(tempIntArray, userNum);
+    endTime = clock();
+    time_t selectInt = difftime(endTime, startTime); //Saves the time for sort
 
     //Copy the arrays
     for (int i = 0; i < userNum; ++i) {
@@ -103,13 +109,15 @@ int main() {
     //Quick Sort (Middle element is pivot)
     cout << endl << "Character Array Quick Sort: - Middle Element is "
                     "pivot" << endl;
-    time_t startTime = clock(); //Stores the time before running the algr.
+    startTime = clock(); //Stores the time before running the algr.
     int calls = quickSort(tempCharArray, 0, userNum-1); //Stores the
                         //number of recursive calls that occur during sorting
-    time_t endTime = clock(); //Stores the time after running the algr.
+     endTime = clock(); //Stores the time after running the algr.
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
-    cout << "Actual CPU Clock time:\t" << difftime(endTime, startTime)
+    time_t quickChar = difftime(endTime, startTime); //Stores the time for
+                                            //quick sorting the char array
+    cout << "Actual CPU Clock time:\t" << quickChar
          << endl;
     cout << "Number of recursive calls: " << calls << endl;
     cout << "Sorted Elements: ";
@@ -123,7 +131,9 @@ int main() {
     endTime = clock();
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
-    cout << "Actual CPU Clock time:\t" << difftime(endTime, startTime)
+    time_t quickInt = difftime(endTime, startTime); //Stores the time to quick
+                                            //sort the int array
+    cout << "Actual CPU Clock time:\t" << quickInt
          << endl;
     cout << "Number of recursive calls: " << calls << endl;
     cout << "Sorted Elements: ";
@@ -144,7 +154,9 @@ int main() {
     endTime = clock(); //Stores the time after running the algr.
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
-    cout << "Actual CPU Clock time:\t" << difftime(endTime, startTime)
+    time_t quickThirdChar = difftime(endTime, startTime); //Stores the time it
+                //take to quick sort the char array with 3rd element as pivot
+    cout << "Actual CPU Clock time:\t" << quickThirdChar
          << endl;
     cout << "Number of recursive calls: " << calls << endl;
     cout << "Sorted Elements: ";
@@ -158,8 +170,10 @@ int main() {
     endTime = clock();
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
-    cout << "Actual CPU Clock time:\t" << difftime(endTime, startTime)
-         << endl;
+    time_t quickThirdInt = difftime(endTime, startTime); //Stores the time it
+                    //takes to quick sort the int array with 3rd element as
+                    //pivot
+    cout << "Actual CPU Clock time:\t" << quickThirdInt << endl;
     cout << "Number of recursive calls: " << calls << endl;
     cout << "Sorted Elements: ";
     display(tempIntArray, userNum);
@@ -170,13 +184,45 @@ int main() {
     quickSort(charArray, 0, userNum - 1);
 
     //Next sequential search / linear search
+    startTime = clock();
     sequentialSearch(charArray, userNum, 'P');
+    endTime = clock();
+    time_t seqSearch = difftime(endTime, startTime); //Stores the time it takes
+    //to search using sequential search
     cout << endl;
 
     //Finally, binary search
+    startTime = clock();
     binarySearch(charArray, userNum, 'P');
+    endTime = clock();
+    time_t binSearch = difftime(endTime, startTime); //Stores the time it takes
+    //to search using binary search
+
+    //Final Analysis Output
+    cout << endl;
+    cout << "Actual CPU Time Summary" << endl;
+    cout << "Character Array Size: " << userNum << endl;
+    cout << "Selection Sort Time: " << selectChar << endl;
+    cout << "Quick Sort Time - Middle Element as Pivot: " << quickChar << endl;
+    cout << "Quick Sort Time - 3rd Element as Pivot: " << quickThirdChar <<
+    endl;
+
+    cout << endl;
+    cout << "Integer Array Size: " << userNum << endl;
+    cout << "Selection Sort Time: " << selectInt << endl;
+    cout << "Quick Sort Time - Middle Element as Pivot: " << quickInt << endl;
+    cout << "Quick Sort Time - 3rd Element as Pivot: " << quickThirdInt <<
+    endl;
+
+    cout << endl;
+    cout << "Searching for element not in the array: " << endl;
+    cout << "Character Array Size: " << userNum << endl;
+    cout << "Sequential Search Time: " << seqSearch << endl;
+    cout << "Binary Search Time: " << binSearch << endl;
+
 
     //Footer
+    cout << endl;
     cout << "November 2022" << endl;
     cout << "Sorting / Searching Benchmark by:" << endl;
     cout << "Jared Wood" << endl;
@@ -597,6 +643,13 @@ void sequentialSearch(char input[], int length, char key)
     cout << "Actual CPU Clock Time: " << difftime(end, start) << endl;
     cout << "Total Number of comparisons: " << comparisons << endl;
 }
+//-----------------------------------------------------------------------------
+//Searches the array for the given key using linear/sequential search
+//
+//param1: input - the array to be searched
+//param2: length - the length of the array
+//param3: key - the character that the meathod is looking for
+//-----------------------------------------------------------------------------
 
 void binarySearch(char input[], int length, char key)
 {
@@ -640,3 +693,10 @@ void binarySearch(char input[], int length, char key)
     cout << "Actual CPU Clock Time: " << difftime(end, start) << endl;
     cout << "Total Number of comparisons: " << comparisons << endl;
 }
+//-----------------------------------------------------------------------------
+//Searches the array for the given key using binary search
+//
+//param1: input - the array to be searched
+//param2: length - the length of the array
+//param3: key - the character that the meathod is looking for
+//-----------------------------------------------------------------------------
