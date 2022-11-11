@@ -29,6 +29,20 @@ int quickSort(int input[], int left, int right);
 int quickSort(char input[], int left, int right);
 //Sorts the array using quicksort
 
+int quickSortThird(int input[], int left, int right);
+//Sorts the array using quicksort and with the pivot being
+//the third element of the array
+
+int quickSortThird(char input[], int left, int right);
+//Sorts the array using quicksort and with the pivot being
+//the third element of the array
+
+void sequentialSearch(char input[], int length, char key);
+//Searches through the array for the specified key using sequential search
+
+void binarySearch(char input[], int length, char key);
+//Searches throughout the array for the specified key using binary search
+
 using namespace std;
 int main() {
 
@@ -47,7 +61,7 @@ int main() {
     {
         cout << "*** Error - Invalid Input - Size must be > 9 ***" << endl;
     }
-    const int arraySize = 10; //TODO: REMOVE FOR TESTING AND SUBMISSION
+    const int arraySize = 10000; //TODO: REMOVE FOR TESTING AND SUBMISSION
 
     //Create the arrays
     char charArray[arraySize] = {}; //TODO
@@ -68,24 +82,26 @@ int main() {
     // for use in the function
     int tempIntArray[arraySize] = {}; //Temporary int array
     // for use in the function
+    //Copy the arrays
     for (int i = 0; i < userNum; ++i) {
         tempCharArray[i] = charArray[i];
         tempIntArray[i] = intArray[i];
     }
 
+    //Selection Sort
     cout << "Character array selection sort:" << endl;
     selectionSort(tempCharArray, userNum);
     cout << endl << "Integer array selection sort:" << endl;
     selectionSort(tempIntArray, userNum);
 
+    //Copy the arrays
     for (int i = 0; i < userNum; ++i) {
         tempCharArray[i] = charArray[i];
         tempIntArray[i] = intArray[i];
     }
 
-
-
-    cout << endl << "Character Array Quick Sort: - Middle Element is"
+    //Quick Sort (Middle element is pivot)
+    cout << endl << "Character Array Quick Sort: - Middle Element is "
                     "pivot" << endl;
     time_t startTime = clock(); //Stores the time before running the algr.
     int calls = quickSort(tempCharArray, 0, userNum-1); //Stores the
@@ -100,7 +116,7 @@ int main() {
     display(tempCharArray, userNum);
 
 
-    cout << endl << "Integer Array Quick Sort: - Middle Element is"
+    cout << endl << "Integer Array Quick Sort: - Middle Element is "
                     "pivot"<< endl;
     startTime = clock();
     calls = quickSort(tempIntArray, 0, userNum-1);
@@ -113,6 +129,52 @@ int main() {
     cout << "Sorted Elements: ";
     display(tempIntArray, userNum);
 
+    //Copy the arrays
+    for (int i = 0; i < userNum; ++i) {
+        tempCharArray[i] = charArray[i];
+        tempIntArray[i] = intArray[i];
+    }
+
+    //Quick Sort (3rd element is pivot)
+    cout << endl << "Character Array Quick Sort: - 3rd Element is "
+                    "pivot" << endl;
+    startTime = clock(); //Stores the time before running the algr.
+    calls = quickSortThird(tempCharArray, 0, userNum-1); //Stores the
+    //number of recursive calls that occur during sorting
+    endTime = clock(); //Stores the time after running the algr.
+    cout << "Start Time:\t" << startTime << endl;
+    cout << "End Time:\t" << endTime << endl;
+    cout << "Actual CPU Clock time:\t" << difftime(endTime, startTime)
+         << endl;
+    cout << "Number of recursive calls: " << calls << endl;
+    cout << "Sorted Elements: ";
+    display(tempCharArray, userNum);
+
+
+    cout << endl << "Integer Array Quick Sort: - 3rd Element is "
+                    "pivot"<< endl;
+    startTime = clock();
+    calls = quickSortThird(tempIntArray, 0, userNum-1);
+    endTime = clock();
+    cout << "Start Time:\t" << startTime << endl;
+    cout << "End Time:\t" << endTime << endl;
+    cout << "Actual CPU Clock time:\t" << difftime(endTime, startTime)
+         << endl;
+    cout << "Number of recursive calls: " << calls << endl;
+    cout << "Sorted Elements: ";
+    display(tempIntArray, userNum);
+    cout << endl;
+
+    //Searching for Integer P
+    //First sort the char array:
+    quickSort(charArray, 0, userNum - 1);
+
+    //Next sequential search / linear search
+    sequentialSearch(charArray, userNum, 'P');
+    cout << endl;
+
+    //Finally, binary search
+    binarySearch(charArray, userNum, 'P');
 
     //Footer
     cout << "November 2022" << endl;
@@ -382,3 +444,199 @@ int quickSort(char input[], int left, int right)
 //param3: right - the rightmost element in the array
 //return: the number of recursive calls in the array
 //-----------------------------------------------------------------------------
+
+int quickSortThird(int input[], int left, int right)
+{
+    int i = left; //Indexing left of the partition
+    int j = right; //Indexing right of the partition
+    int temp; //Temporary variable for swapping numbers
+    int pivot = input[left + 2]; //Determines the location of the
+    //pivot - uses 3rd element as pivot
+    static int calls = 0; //Stores the number of recursive calls
+
+    while(i <= j)
+    {
+        //Move the left index right until a value larger than
+        // the partition is found
+        while (input[i] < pivot)
+        {
+            i++;
+        }
+        //Move the right index left until a value less than
+        // the partition is found
+        while (input[j] > pivot)
+        {
+            j--;
+        }
+        //If the 'i' index is less than or equal to the 'j' index
+        if (i <= j)
+        {
+            //Swap the values
+            temp = input[i];
+            input[i] = input[j];
+            input[j] = temp;
+            //Move th indexes
+            i++;
+            j--;
+        }
+    }
+
+    //Recursion
+    //Once both sides have been sorted
+    //(Results in [elements] < partition < [elements])
+    //Recursively call the function to repeat for each section of the
+    //partition
+    if (left < j)
+    {
+        calls++;
+        quickSort(input, left, j);
+    }
+    if (i < right)
+    {
+        calls++;
+        quickSort(input, i, right);
+    }
+    return calls;
+}
+//-----------------------------------------------------------------------------
+//Uses quick sort to sort the elements in the given array, but uses the
+//3rd element in the array as the pivot.
+//param1: input - The array to be sorted
+//param2: left - the left most element in the array
+//param3: right - the rightmost element in the array
+//return: the number of recursive calls in the array
+//-----------------------------------------------------------------------------
+
+int quickSortThird(char input[], int left, int right)
+{
+    int i = left; //Indexing left of the partition
+    int j = right; //Indexing right of the partition
+    int temp; //Temporary variable for swapping numbers
+    int pivot = input[left + 2]; //Determines the location of the
+    //pivot - uses 3rd element as pivot
+    static int calls = 0; //Stores the number of recursive calls
+
+    while(i <= j)
+    {
+        //Move the left index right until a value larger than
+        // the partition is found
+        while (input[i] < pivot)
+        {
+            i++;
+        }
+        //Move the right index left until a value less than
+        // the partition is found
+        while (input[j] > pivot)
+        {
+            j--;
+        }
+        //If the 'i' index is less than or equal to the 'j' index
+        if (i <= j)
+        {
+            //Swap the values
+            temp = input[i];
+            input[i] = input[j];
+            input[j] = temp;
+            //Move th indexes
+            i++;
+            j--;
+        }
+    }
+
+    //Recursion
+    //Once both sides have been sorted
+    //(Results in [elements] < partition < [elements])
+    //Recursively call the function to repeat for each section of the
+    //partition
+    if (left < j)
+    {
+        calls++;
+        quickSort(input, left, j);
+    }
+    if (i < right)
+    {
+        calls++;
+        quickSort(input, i, right);
+    }
+    return calls;
+}
+//-----------------------------------------------------------------------------
+//Uses quick sort to sort the elements in the given array, but uses the
+//3rd element in the array as the pivot.
+//param1: input - The array to be sorted
+//param2: left - the left most element in the array
+//param3: right - the rightmost element in the array
+//return: the number of recursive calls in the array
+//-----------------------------------------------------------------------------
+
+void sequentialSearch(char input[], int length, char key)
+{
+    int loc = -1; //Stores the location of the key if found
+                //-1 represents if the key is not found
+
+    int comparisons = 0; //Stores the number of comparisons
+    time_t start = clock(); //Stores the time at the start of searching
+    for (int i = 0; i < length; ++i) {
+        if (input[i] == key)
+        {
+            loc = i;
+        }
+        comparisons++;
+    }
+    time_t end = clock(); //Stores the time at the end of searching
+    if (loc == -1)
+    {
+        cout << "Char " << key << " was not found." << endl;
+    }
+    else
+    {
+        cout << "Found " << key << " at " << loc << endl;
+    }
+    cout << "Start Time:\t" << start << endl;
+    cout << "End Time:\t" << end << endl;
+    cout << "Actual CPU Clock Time: " << difftime(end, start) << endl;
+    cout << "Total Number of comparisons: " << comparisons << endl;
+}
+
+void binarySearch(char input[], int length, char key)
+{
+    int first = 0; //First element of the array
+    int last = length - 1; //Lst element of the array
+    int mid; //The middle of the array
+    int loc = -1; //Location of the searching element
+    int comparisons = 0; //The number of comparisons
+
+    time_t start = clock();
+    while (first <= last)
+    {
+        mid = ( first + last ) / 2; //Getting the middle
+        if (input[mid] == key)
+        {
+            loc = mid;
+            break;
+        }
+        else if (input[mid] > key)
+        {
+            last = mid - 1;
+        }
+        else
+        {
+            first = mid + 1;
+        }
+        comparisons++;
+    }
+
+    time_t end = clock();
+    if (loc == -1)
+    {
+        cout << "Char " << key << " was not found." << endl;
+    }
+    else
+    {
+        cout << "Found " << key << " at " << loc << endl;
+    }
+    cout << "Start Time:\t" << start << endl;
+    cout << "End Time:\t" << end << endl;
+    cout << "Actual CPU Clock Time: " << difftime(end, start) << endl;
+    cout << "Total Number of comparisons: " << comparisons << endl;
+}
