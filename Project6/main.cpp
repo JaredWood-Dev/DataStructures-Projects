@@ -54,18 +54,22 @@ int main() {
 
     //Get user input and create an array of length n
     int userNum = 0; //Gets and stores the user's input, used for
-                        //array creation
+    //array creation
     cout << "Enter the size of the array: " << endl;
     cin >> userNum;
     if (userNum < 9)
     {
         cout << "*** Error - Invalid Input - Size must be > 9 ***" << endl;
+        cout << endl;
+        cout << "November 2022" << endl;
+        cout << "Sorting / Searching Benchmark by:" << endl;
+        cout << "Jared Wood" << endl;
+        return 0;
     }
-    const int arraySize = 10000; //TODO: REMOVE FOR TESTING AND SUBMISSION
 
     //Create the arrays
-    char charArray[arraySize] = {}; //TODO
-    int intArray[arraySize] = {}; //TODO
+    char charArray[userNum] = {};
+    int intArray[userNum] = {};
 
     //Populate the arrays
     for (int i = 0; i < userNum; ++i) {
@@ -78,9 +82,9 @@ int main() {
     cout << "Integer array elements are: ";
     display(intArray, userNum);
 
-    char tempCharArray[arraySize] = {}; //Temporary char array
+    char tempCharArray[userNum] = {}; //Temporary char array
     // for use in the function
-    int tempIntArray[arraySize] = {}; //Temporary int array
+    int tempIntArray[userNum] = {}; //Temporary int array
     // for use in the function
     //Copy the arrays
     for (int i = 0; i < userNum; ++i) {
@@ -111,12 +115,12 @@ int main() {
                     "pivot" << endl;
     startTime = clock(); //Stores the time before running the algr.
     int calls = quickSort(tempCharArray, 0, userNum-1); //Stores the
-                        //number of recursive calls that occur during sorting
-     endTime = clock(); //Stores the time after running the algr.
+    //number of recursive calls that occur during sorting
+    endTime = clock(); //Stores the time after running the algr.
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
     time_t quickChar = difftime(endTime, startTime); //Stores the time for
-                                            //quick sorting the char array
+    //quick sorting the char array
     cout << "Actual CPU Clock time:\t" << quickChar
          << endl;
     cout << "Number of recursive calls: " << calls << endl;
@@ -132,7 +136,7 @@ int main() {
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
     time_t quickInt = difftime(endTime, startTime); //Stores the time to quick
-                                            //sort the int array
+    //sort the int array
     cout << "Actual CPU Clock time:\t" << quickInt
          << endl;
     cout << "Number of recursive calls: " << calls << endl;
@@ -155,7 +159,7 @@ int main() {
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
     time_t quickThirdChar = difftime(endTime, startTime); //Stores the time it
-                //take to quick sort the char array with 3rd element as pivot
+    //take to quick sort the char array with 3rd element as pivot
     cout << "Actual CPU Clock time:\t" << quickThirdChar
          << endl;
     cout << "Number of recursive calls: " << calls << endl;
@@ -171,8 +175,8 @@ int main() {
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << endTime << endl;
     time_t quickThirdInt = difftime(endTime, startTime); //Stores the time it
-                    //takes to quick sort the int array with 3rd element as
-                    //pivot
+    //takes to quick sort the int array with 3rd element as
+    //pivot
     cout << "Actual CPU Clock time:\t" << quickThirdInt << endl;
     cout << "Number of recursive calls: " << calls << endl;
     cout << "Sorted Elements: ";
@@ -205,14 +209,14 @@ int main() {
     cout << "Selection Sort Time: " << selectChar << endl;
     cout << "Quick Sort Time - Middle Element as Pivot: " << quickChar << endl;
     cout << "Quick Sort Time - 3rd Element as Pivot: " << quickThirdChar <<
-    endl;
+         endl;
 
     cout << endl;
     cout << "Integer Array Size: " << userNum << endl;
     cout << "Selection Sort Time: " << selectInt << endl;
     cout << "Quick Sort Time - Middle Element as Pivot: " << quickInt << endl;
     cout << "Quick Sort Time - 3rd Element as Pivot: " << quickThirdInt <<
-    endl;
+         endl;
 
     cout << endl;
     cout << "Searching for element not in the array: " << endl;
@@ -306,7 +310,7 @@ void selectionSort(int input[], int length)
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << finalTime << endl;
     cout << "Actual CPU Clock time:\t" << difftime(finalTime, startTime)
-    << endl;
+         << endl;
 
     cout << "Total Number of Swaps:\t" << comparisons << endl;
 
@@ -352,7 +356,7 @@ void selectionSort(char input[], int length)
     cout << "Start Time:\t" << startTime << endl;
     cout << "End Time:\t" << finalTime << endl;
     cout << "Actual CPU Clock time:\t" << difftime(finalTime, startTime)
-    << endl;
+         << endl;
 
     cout << "Total Number of Swaps:\t" << comparisons << endl;
 
@@ -618,7 +622,7 @@ int quickSortThird(char input[], int left, int right)
 void sequentialSearch(char input[], int length, char key)
 {
     int loc = -1; //Stores the location of the key if found
-                //-1 represents if the key is not found
+    //-1 represents if the key is not found
 
     int comparisons = 0; //Stores the number of comparisons
     time_t start = clock(); //Stores the time at the start of searching
